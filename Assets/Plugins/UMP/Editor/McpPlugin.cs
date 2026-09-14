@@ -20,10 +20,10 @@ namespace UnityMcpPro
             AssemblyReloadEvents.beforeAssemblyReload += OnBeforeAssemblyReload;
         }
 
-        [MenuItem("Window/Unity MCP Pro")]
+        [MenuItem("Edit/Editor Bridge")]
         public static void ShowWindow()
         {
-            _instance = GetWindow<McpPlugin>("Unity MCP Pro");
+            _instance = GetWindow<McpPlugin>("Editor Bridge");
         }
 
         private static void OnEditorUpdate()
@@ -45,7 +45,7 @@ namespace UnityMcpPro
             _wsServer = new WebSocketServer(_router);
             _wsServer.Start();
 
-            Debug.Log("[MCP] Unity MCP Pro plugin initialized");
+            Debug.Log("[Bridge] Editor Bridge initialized");
         }
 
         private static void RegisterCommands()
@@ -196,7 +196,7 @@ namespace UnityMcpPro
 
         private void OnGUI()
         {
-            GUILayout.Label("Unity MCP Pro", EditorStyles.boldLabel);
+            GUILayout.Label("Editor Bridge", EditorStyles.boldLabel);
             GUILayout.Space(10);
 
             bool connected = _wsServer != null && _wsServer.IsConnected;

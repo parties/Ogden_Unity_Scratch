@@ -207,7 +207,7 @@ namespace UnityMcpPro
             }
             catch (Exception e)
             {
-                Debug.LogWarning($"[MCP] Game View texture capture failed, using fallback: {e.Message}");
+                Debug.LogWarning($"[Bridge] Game View texture capture failed, using fallback: {e.Message}");
                 return null;
             }
         }
@@ -422,7 +422,7 @@ namespace UnityMcpPro
                     session.error = e.Message;
                     session.complete = true;
                     EditorApplication.update -= callback;
-                    Debug.LogError($"[MCP] Frame capture failed: {e.Message}");
+                    Debug.LogError($"[Bridge] Frame capture failed: {e.Message}");
                 }
             };
 

@@ -34,7 +34,7 @@ namespace UnityMcpPro
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[MCP] Command error ({request.method}): {ex.Message}\n{ex.StackTrace}");
+                Debug.LogError($"[Bridge] Command error ({request.method}): {ex.Message}\n{ex.StackTrace}");
                 responseJson = JsonHelper.CreateErrorResponse(request.id, -32000, ex.Message);
             }
 

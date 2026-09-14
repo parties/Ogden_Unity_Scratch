@@ -366,7 +366,7 @@ namespace UnityMcpPro
                             {
                                 ProfilerDriver.enabled = false;
                                 EditorApplication.update -= autoStop;
-                                Debug.Log($"[MCP] Profiler auto-stopped after {duration} seconds. " +
+                                Debug.Log($"[Bridge] Profiler auto-stopped after {duration} seconds. " +
                                           $"Captured frames: {ProfilerDriver.lastFrameIndex - ProfilerDriver.firstFrameIndex + 1}");
                             }
                         };

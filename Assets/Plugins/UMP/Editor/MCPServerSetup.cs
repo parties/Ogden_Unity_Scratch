@@ -24,10 +24,10 @@ namespace UnityMcpPro
             "Windsurf"
         };
 
-        [MenuItem("Window/Unity MCP Pro/Server Setup")]
+        [MenuItem("Edit/Editor Bridge/Server Setup")]
         public static void ShowWindow()
         {
-            GetWindow<MCPServerSetup>("MCP Server Setup");
+            GetWindow<MCPServerSetup>("Editor Bridge Setup");
         }
 
         private void OnEnable()
@@ -102,7 +102,7 @@ namespace UnityMcpPro
         {
             _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
 
-            GUILayout.Label("Unity MCP Pro — Server Setup", EditorStyles.boldLabel);
+            GUILayout.Label("Editor Bridge — Setup", EditorStyles.boldLabel);
             GUILayout.Space(10);
 
             DrawPrerequisites();

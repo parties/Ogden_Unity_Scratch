@@ -292,7 +292,7 @@ namespace UnityMcpPro
                 if (obj != null)
                     packables.Add(obj);
                 else
-                    Debug.LogWarning($"[MCP] SpriteAtlas source not found: {source}");
+                    Debug.LogWarning($"[Bridge] SpriteAtlas source not found: {source}");
             }
 
             if (packables.Count > 0)

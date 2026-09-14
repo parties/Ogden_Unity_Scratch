@@ -269,7 +269,7 @@ namespace UnityMcpPro
                     }
                     catch (Exception ex)
                     {
-                        Debug.LogWarning($"[MCP] Could not set {effectName}.{kvp.Key}: {ex.Message}");
+                        Debug.LogWarning($"[Bridge] Could not set {effectName}.{kvp.Key}: {ex.Message}");
                     }
                 }
             }
@@ -508,7 +508,7 @@ namespace UnityMcpPro
                     var effectType = FindVolumeComponentType(effectName);
                     if (effectType == null)
                     {
-                        Debug.LogWarning($"[MCP] Effect type '{effectName}' not found, skipping.");
+                        Debug.LogWarning($"[Bridge] Effect type '{effectName}' not found, skipping.");
                         continue;
                     }
 
@@ -527,7 +527,7 @@ namespace UnityMcpPro
                     }
                     catch (Exception ex)
                     {
-                        Debug.LogWarning($"[MCP] Failed to add effect '{effectName}': {ex.Message}");
+                        Debug.LogWarning($"[Bridge] Failed to add effect '{effectName}': {ex.Message}");
                     }
                 }
             }
@@ -598,7 +598,7 @@ namespace UnityMcpPro
                 var effectType = FindVolumeComponentType(effectName);
                 if (effectType == null)
                 {
-                    Debug.LogWarning($"[MCP] Preset effect '{effectName}' not found in render pipeline, skipping.");
+                    Debug.LogWarning($"[Bridge] Preset effect '{effectName}' not found in render pipeline, skipping.");
                     continue;
                 }
 
@@ -644,7 +644,7 @@ namespace UnityMcpPro
                     }
                     catch (Exception ex)
                     {
-                        Debug.LogWarning($"[MCP] Could not set {effectName}.{prop.Key}: {ex.Message}");
+                        Debug.LogWarning($"[Bridge] Could not set {effectName}.{prop.Key}: {ex.Message}");
                     }
                 }
 

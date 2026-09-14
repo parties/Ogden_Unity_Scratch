@@ -149,7 +149,7 @@ namespace UnityMcpPro
 
                                 int p = port; // capture for closure
                                 _mainThreadActions.Enqueue(new PendingAction(() =>
-                                    Debug.Log($"[MCP] Connected to MCP server on port {p} (active connections: {ConnectionCount})")));
+                                    Debug.Log($"[Bridge] Connected on port {p} (active connections: {ConnectionCount})")));
                             }
                             else
                             {
@@ -345,7 +345,7 @@ namespace UnityMcpPro
                                 int p = conn.Port;
                                 string reason = closeReason ?? "(no reason)";
                                 _mainThreadActions.Enqueue(new PendingAction(() =>
-                                    Debug.Log($"[MCP] Port {p} not for this project — backing off ({reason})")));
+                                    Debug.Log($"[Bridge] Port {p} not for this project — backing off ({reason})")));
                             }
                             SendCloseFrame(conn);
                             conn.Connected = false;
@@ -367,7 +367,7 @@ namespace UnityMcpPro
                     string msg = ex.Message;
                     int port = conn.Port;
                     _mainThreadActions.Enqueue(new PendingAction(() =>
-                        Debug.LogWarning($"[MCP] WebSocket error on port {port}: {msg}")));
+                        Debug.LogWarning($"[Bridge] WebSocket error on port {port}: {msg}")));
                 }
             }
             finally
@@ -380,7 +380,7 @@ namespace UnityMcpPro
                     int port = conn.Port;
                     int remaining = ConnectionCount;
                     _mainThreadActions.Enqueue(new PendingAction(() =>
-                        Debug.Log($"[MCP] Disconnected from port {port} (active connections: {remaining})")));
+                        Debug.Log($"[Bridge] Disconnected from port {port} (active connections: {remaining})")));
                 }
             }
         }
@@ -509,7 +509,7 @@ namespace UnityMcpPro
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[MCP] Error processing message on port {conn.Port}: {ex.Message}");
+                Debug.LogError($"[Bridge] Error processing message on port {conn.Port}: {ex.Message}");
             }
         }
 
