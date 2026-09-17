@@ -4,6 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
     public float jumpForce = 9f;
+    public int health = 100;
     private Rigidbody2D rb;
     private bool isGrounded = false;
     void Start()
