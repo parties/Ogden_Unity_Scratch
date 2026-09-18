@@ -13,10 +13,12 @@ public class Enemy : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 playerStart;
     private int direction = 1;     // 1 is right, -1 is left
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
         startPosition = transform.position;
+        spriteRenderer = GetComponent<SpriteRenderer>();
         Physics2D.queriesStartInColliders = false;  // don't detect the enemy's own collider
 
         GameObject player = GameObject.FindWithTag("Player");
@@ -45,9 +47,18 @@ public class Enemy : MonoBehaviour
 
         if (blocked || Mathf.Abs(transform.position.x - startPosition.x) >= distance)
         {
-            direction = -direction;
+            direction = -direction; // flip direction
             startPosition = transform.position;   // start measuring the walk from here
+            spriteRenderer.flipX = !spriteRenderer.flipX;
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Player")) return;
+
+        direction = -direction;
+        startPosition = transform.position;
     }
 
 
