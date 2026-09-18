@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Ogden_Unity_Scratch.slnx"
+    "dotnet.defaultSolution": "Ogden_Scratch_Curriculum.slnx"
 }

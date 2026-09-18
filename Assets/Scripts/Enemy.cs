@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         startPosition = transform.position;
+        Physics2D.queriesStartInColliders = false;  // don't detect the enemy's own collider
 
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
@@ -29,16 +30,17 @@ public class Enemy : MonoBehaviour
     {
         transform.Translate(Vector3.right * direction * speed * Time.deltaTime);
 
-        // Peek one step ahead of the enemy's middle. Something solid there? Turn now.
-        Vector2 ahead = new Vector2(transform.position.x + direction * lookAhead,
-                                    transform.position.y);
-        Collider2D wall = Physics2D.OverlapPoint(ahead);
+        // Raycast, not OverlapPoint: the level's collider is Outlines — edges, no inside.
+        RaycastHit2D hit = Physics2D.Raycast(
+            transform.position,
+            Vector2.right * direction,
+            lookAhead
+        );
 
         bool blocked = (
-            wall != null
-            && !wall.isTrigger                // ignore coins, flags, our own trigger
-            && wall.gameObject != gameObject  // ignore ourselves
-            && !wall.CompareTag("Player")
+            hit.collider != null
+            && !hit.collider.isTrigger
+            && !hit.collider.CompareTag("Player")
         );
 
         if (blocked || Mathf.Abs(transform.position.x - startPosition.x) >= distance)
@@ -53,11 +55,17 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // check whether the player is above the enemy and falling.
-            // other.transform.position.y > this.
-            // If it is, destroy the enemy (see below) instead of moving the player.
-            // Two things to look up: Destroy(gameObject), and how to
+            if (!other.CompareTag("Player")) return;
 
+            // Is the player above us? Then we got stomped.
+            if (other.transform.position.y > transform.position.y + 0.4f)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                other.transform.position = playerStart;
+            }
 
             // reset the player
             other.transform.position = playerStart;
