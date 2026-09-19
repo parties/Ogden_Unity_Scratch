@@ -176,8 +176,8 @@ GameObject:
   - component: {fileID: 284966104}
   - component: {fileID: 284966103}
   - component: {fileID: 284966106}
-  - component: {fileID: 284966107}
   - component: {fileID: 284966108}
+  - component: {fileID: 284966107}
   m_Layer: 0
   m_Name: slime_fire_rest_0
   m_TagString: Untagged
@@ -299,7 +299,7 @@ Transform:
   m_GameObject: {fileID: 284966102}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.17, y: 2.3, z: 0}
+  m_LocalPosition: {x: -5.78, y: 1.74, z: 0}
   m_LocalScale: {x: 1.7782888, y: 1.7782888, z: 1.7782888}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -331,7 +331,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &284966107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,7 +345,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   speed: 2
-  distance: 3
+  distance: 6.4
+  lookAhead: 0.6
 --- !u!61 &284966108
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -723,6 +724,26 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: -9, y: 1, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 2
+      m_TileSpriteIndex: 2
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -3, y: 1, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 2
+      m_TileSpriteIndex: 2
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 4, y: 3, z: 0}
     second:
       serializedVersion: 2
@@ -769,13 +790,17 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 7448ad1b812db1844aa8c2122a64a0c5, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 2
+    m_Data: {fileID: 11400000, guid: 99eea7710ca2f6f4dad7e36b4375286e, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 27
     m_Data: {fileID: 649487501984905667, guid: 4a05a264768f752419d84ac197b4a67a, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 2
+    m_Data: {fileID: 5065677484600626758, guid: 07d55dc21edfa8644b4401f036015799, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 27
+  - m_RefCount: 29
     m_Data:
       e00: 1
       e01: 0
@@ -794,7 +819,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 27
+  - m_RefCount: 29
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -869,6 +894,26 @@ CompositeCollider2D:
         Y: 30000000
       - X: 80000000
         Y: 30000000
+    - - X: -20000000
+        Y: 20000000
+      - X: -30000000
+        Y: 20000000
+      - X: -30000000
+        Y: 10000000
+      - X: -80000000
+        Y: 10000000
+      - X: -80000000
+        Y: 20000000
+      - X: -90000000
+        Y: 20000000
+      - X: -90000000
+        Y: 10000000
+      - X: -120000000
+        Y: 10000000
+      - X: -120000000
+        Y: 0
+      - X: -20000000
+        Y: 0
     - - X: 130000000
         Y: 10000000
       - X: 0
@@ -877,28 +922,26 @@ CompositeCollider2D:
         Y: 0
       - X: 130000000
         Y: 0
-    - - X: -20000000
-        Y: 10000000
-      - X: -120000000
-        Y: 10000000
-      - X: -120000000
-        Y: 0
-      - X: -20000000
-        Y: 0
   m_CompositePaths:
     m_Paths:
     - - {x: 7.9999704, y: 3}
       - {x: 7.9999704, y: 4}
       - {x: 4, y: 3.999971}
       - {x: 4.000029, y: 3}
+    - - {x: -2.0000293, y: 0}
+      - {x: -2.0000293, y: 2}
+      - {x: -3, y: 1.9999708}
+      - {x: -3.0000293, y: 1}
+      - {x: -8, y: 1.0000294}
+      - {x: -8.00003, y: 2}
+      - {x: -9, y: 1.9999708}
+      - {x: -9.00003, y: 1}
+      - {x: -12, y: 0.99997073}
+      - {x: -11.99997, y: 0}
     - - {x: 12.99997, y: 0}
       - {x: 12.99997, y: 1}
       - {x: 0, y: 0.99997073}
       - {x: 0.000029300001, y: 0}
-    - - {x: -2.0000293, y: 0}
-      - {x: -2.0000293, y: 1}
-      - {x: -12, y: 0.99997073}
-      - {x: -11.99997, y: 0}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
@@ -1074,7 +1117,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1099,7 +1142,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: -10}
+  m_LocalPosition: {x: -6.57, y: 3, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
