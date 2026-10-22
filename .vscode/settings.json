@@ -1,4 +1,7 @@
 {
+    "files.autoSave": "afterDelay",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
     "files.exclude": {
         "**/.DS_Store": true,
         "**/.git": true,
