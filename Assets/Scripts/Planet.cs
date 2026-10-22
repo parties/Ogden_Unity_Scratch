@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class Planet : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
+    [SerializeField] private StackRandomizer stack;
 
     // Update is called once per frame
     void Update()
@@ -13,7 +10,7 @@ public class Planet : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Space");
-            // StackRandomizer.Randomize();
+            stack.Randomize();
         }
     }
 }
