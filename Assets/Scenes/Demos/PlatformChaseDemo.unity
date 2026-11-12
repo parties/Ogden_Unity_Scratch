@@ -349,7 +349,7 @@ MonoBehaviour:
     at the edges, and waits at the edge when it sees you.
 
     Fire slime: Can Jump
-    on. It chases you across the gap and jumps toward you when you''re above it.'
+    on. It follows you over the gap and the stone block, and jumps up toward you.'
 --- !u!222 &549838757
 CanvasRenderer:
   m_ObjectHideFlags: 0

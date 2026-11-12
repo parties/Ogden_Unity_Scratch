@@ -8,13 +8,20 @@
 //    enemy; PlatformChase only borrows its sight code.
 // 2. The player needs Tag: Player.
 // 3. Select the enemy. Add Component > Rigidbody 2D, a Collider 2D (Box or
-//    Capsule), then PlatformChase. The ground needs a collider too.
+//    Capsule), then PlatformChase.
+// 4. Set up the ground the way the Tilemap Lab does: Tilemap Collider 2D with
+//    Composite Operation = Merge, a Composite Collider 2D, and Body Type =
+//    Static on the Rigidbody 2D the composite adds. With a Tilemap Collider 2D
+//    alone, the enemy catches on the lines between tiles and stops.
 //
 // Check Can Jump and it jumps over walls and gaps, and up toward a player
 // above it, instead of stopping.
-// Draw the enemy sprite facing right. It flips to face the way it walks.
+// It flips to face the way it walks. Kenney enemies are drawn facing left, so
+// Sprite Faces Left starts checked. Uncheck it if your enemy faces right.
 // With the enemy selected, yellow lines in the Scene view show what it can see.
 // Walls block sight, like EnemyChase. Hide on the player works here too.
+// When it loses sight of you (a wall, or you hide), it keeps chasing for Keep
+// Chasing After Hide seconds, so a jumper follows you over a wall.
 // To hurt the player, add ContactDamage and Health.
 
 using UnityEngine;
@@ -41,10 +48,13 @@ public class PlatformChase : MonoBehaviour
     [Tooltip("Start facing right. Uncheck to start facing left.")]
     public bool startFacingRight = true;
 
+    [Tooltip("Kenney enemies are drawn facing left. Uncheck if your enemy is drawn facing right.")]
+    public bool spriteFacesLeft = true;
+
     [Tooltip("Walls block what it can see. Uncheck to see through walls.")]
     public bool wallsBlockSight = true;
 
-    [Tooltip("If it was chasing when the player hid, it keeps chasing this many seconds.")]
+    [Tooltip("If it was chasing when it lost sight of the player (a wall, or the player hid), it keeps chasing this many seconds.")]
     public float keepChasingAfterHide = 3f;
 
     [Tooltip("Jump over walls and gaps, and up toward the player, instead of stopping.")]
@@ -137,22 +147,21 @@ public class PlatformChase : MonoBehaviour
         velocity.x = direction * speed;
         body.linearVelocity = velocity;
 
-        if (sprite != null) sprite.flipX = direction < 0f;
+        // Flip when it walks the opposite way from how the art is drawn.
+        if (sprite != null) sprite.flipX = (direction < 0f) != spriteFacesLeft;
     }
 
     bool ShouldChase()
     {
-        // Hidden: only an enemy that was already chasing keeps going, for a little while.
-        if (EnemyChase.playerHidden) return Time.time < chaseUntil;
-
         Vector2 look = new Vector2(direction, 0f);
-        if (EnemyChase.CanSee(transform.position, look, player.position, sightRange, visionAngle, wallsBlockSight))
+        if (!EnemyChase.playerHidden && EnemyChase.CanSee(transform.position, look, player.position, sightRange, visionAngle, wallsBlockSight))
         {
             chaseUntil = Time.time + keepChasingAfterHide;
             return true;
         }
-        chaseUntil = 0f;
-        return false;
+        // Lost sight (a wall, or the player hid): keep chasing a little while, so a
+        // jumper follows the player over a wall instead of turning back.
+        return Time.time < chaseUntil;
     }
 
     bool IsGrounded()
