@@ -1,0 +1,6 @@
+{
+    "name": "ClassroomTools.Updater",
+    "includePlatforms": [
+        "Editor"
+    ]
+}
