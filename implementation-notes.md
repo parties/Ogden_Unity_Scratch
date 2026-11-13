@@ -12,3 +12,4 @@ Working log of deviations. Delete before this branch merges.
 - Tower defense demo balance: towers range 2.5 to 3, one hit or arrow every 1.2 s; slimes 5 HP, ladybugs 4 HP. In test runs about two enemies reach the base and you win with 3 of 5 HP. Spawns are random, so it varies.
 - WaypointFollower.cs: new Is Enemy checkbox (on by default). TroopGold.cs says a troop can walk a path with WaypointFollower, but at the end of the path every walker lost the game. Unchecked, the troop just disappears at the end.
 - Tower building demo: start gold 30. In a test run that bought four towers and never fired a cannon, the base ended at 1 HP; firing the cannons makes it comfortable.
+- Clicker and gathering are two scenes: ClickerDemo (Reach 0, never runs out) and GatherDemo (walk up, Reach 2, breaks for good). ClickPickup and Mineable ignore clicks after the game is over.
