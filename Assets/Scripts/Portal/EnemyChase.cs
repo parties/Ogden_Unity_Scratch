@@ -48,6 +48,7 @@ public class EnemyChase : MonoBehaviour
 
     Rigidbody2D body;
     Transform player;
+    Collider2D playerBox;
     float chaseUntil = 0f;
 
     void Awake()
@@ -60,7 +61,11 @@ public class EnemyChase : MonoBehaviour
     void Start()
     {
         GameObject found = GameObject.FindWithTag("Player");
-        if (found != null) player = found.transform;
+        if (found != null)
+        {
+            player = found.transform;
+            playerBox = found.GetComponent<Collider2D>();
+        }
         else Debug.LogWarning(name + " can't find the player. Set Tag: Player on your player.");
     }
 
@@ -69,7 +74,9 @@ public class EnemyChase : MonoBehaviour
         if (player != null && ShouldChase())
         {
             facing = (player.position - transform.position).normalized;
-            body.linearVelocity = facing * speed;
+            // Once it touches the player it stops, so it doesn't shove them along.
+            bool touching = playerBox != null && body.IsTouching(playerBox);
+            body.linearVelocity = touching ? Vector2.zero : facing * speed;
         }
         else
         {
