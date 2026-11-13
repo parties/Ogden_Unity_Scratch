@@ -10,3 +10,5 @@ Working log of deviations. Delete before this branch merges.
 - Demo build scripts bake Tilemap collider shapes before saving. Built by script, the walls had saved with no collision at all.
 - WaypointFollower.cs: when the last enemy reaches the base (and the base is still standing), the game now ends with "You win!". Before, the game kept running with nothing left.
 - Tower defense demo balance: towers range 2.5 to 3, one hit or arrow every 1.2 s; slimes 5 HP, ladybugs 4 HP. In test runs about two enemies reach the base and you win with 3 of 5 HP. Spawns are random, so it varies.
+- WaypointFollower.cs: new Is Enemy checkbox (on by default). TroopGold.cs says a troop can walk a path with WaypointFollower, but at the end of the path every walker lost the game. Unchecked, the troop just disappears at the end.
+- Tower building demo: start gold 30. In a test run that bought four towers and never fired a cannon, the base ended at 1 HP; firing the cannons makes it comfortable.

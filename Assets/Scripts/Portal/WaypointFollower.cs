@@ -31,6 +31,9 @@ public class WaypointFollower : MonoBehaviour
     [Tooltip("How many HP the base loses when this enemy reaches the end.")]
     public int damageAtEnd = 1;
 
+    [Tooltip("Uncheck for a friendly troop. It walks the path and disappears at the end without hurting anything.")]
+    public bool isEnemy = true;
+
     int next = 0;
 
     void Update()
@@ -43,6 +46,12 @@ public class WaypointFollower : MonoBehaviour
 
         next = next + 1;
         if (next < path.childCount) return;
+
+        if (!isEnemy)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         if (baseHealth != null)
         {
