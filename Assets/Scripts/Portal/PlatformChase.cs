@@ -70,6 +70,7 @@ public class PlatformChase : MonoBehaviour
     Collider2D box;
     SpriteRenderer sprite;
     Transform player;
+    Collider2D playerBox;
     ContactFilter2D groundFilter;
     float direction = 1f;
     float chaseUntil = 0f;
@@ -91,7 +92,11 @@ public class PlatformChase : MonoBehaviour
     void Start()
     {
         GameObject found = GameObject.FindWithTag("Player");
-        if (found != null) player = found.transform;
+        if (found != null)
+        {
+            player = found.transform;
+            playerBox = found.GetComponent<Collider2D>();
+        }
         else Debug.LogWarning(name + " can't find the player. Set Tag: Player on your player.");
         if (box == null) Debug.LogWarning(name + " needs a Collider 2D for PlatformChase to find ledges.");
     }
@@ -106,7 +111,9 @@ public class PlatformChase : MonoBehaviour
         if (chasing)
         {
             float gap = player.position.x - transform.position.x;
-            if (Mathf.Abs(gap) > 0.1f)
+            // Once it touches the player it stops, so it doesn't shove them along.
+            bool touching = playerBox != null && body.IsTouching(playerBox);
+            if (Mathf.Abs(gap) > 0.1f && !touching)
             {
                 direction = Mathf.Sign(gap);
                 speed = chaseSpeed;
