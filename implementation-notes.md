@@ -8,3 +8,5 @@ Working log of deviations. Delete before this branch merges.
 - Added the Enemy tag to TagManager; Health's win check and Shot's default target need it.
 - Added Assets/Scenes/Demos/Art/Square.png, a 4x4 white sprite for plain shapes (swing flash, blocks).
 - Demo build scripts bake Tilemap collider shapes before saving. Built by script, the walls had saved with no collision at all.
+- WaypointFollower.cs: when the last enemy reaches the base (and the base is still standing), the game now ends with "You win!". Before, the game kept running with nothing left.
+- Tower defense demo balance: towers range 2.5 to 3, one hit or arrow every 1.2 s; slimes 5 HP, ladybugs 4 HP. In test runs about two enemies reach the base and you win with 3 of 5 HP. Spawns are random, so it varies.
