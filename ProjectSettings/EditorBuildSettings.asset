@@ -4,7 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Demos/Dungeon/DungeonRoom1.unity
+    guid: d2bb273a3fa474c8393e072cad1208ab
+  - enabled: 1
+    path: Assets/Scenes/Demos/Dungeon/DungeonRoom2.unity
+    guid: ef14e45a0c43946edb9c040733f777fd
+  - enabled: 1
+    path: Assets/Scenes/Demos/Dungeon/DungeonGameOver.unity
+    guid: 36c553ed5d75d47ae873724adbe3da01
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

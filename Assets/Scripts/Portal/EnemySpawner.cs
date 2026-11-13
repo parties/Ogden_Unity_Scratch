@@ -51,6 +51,7 @@ public class EnemySpawner : MonoBehaviour
     int nextPoint = 0;
     float timer = 0f;
     bool entered = false;
+    bool pending = false;
 
     void Start()
     {
@@ -60,6 +61,12 @@ public class EnemySpawner : MonoBehaviour
             if (enemy.scene.IsValid()) enemy.SetActive(false);
         }
 
+        // A room spawner nobody has walked into yet still has enemies to send.
+        if (!spawnAtStart && spawnKey == Key.None)
+        {
+            SetPending(true);
+            if (GetComponent<Collider2D>() == null) Debug.LogWarning(name + " waits for the player but has no Box Collider 2D, so it never spawns.");
+        }
         if (spawnAtStart) StartWave();
         Health.winWhenEnemiesGone = false;
     }
@@ -74,6 +81,7 @@ public class EnemySpawner : MonoBehaviour
 
         left = howMany;
         timer = secondsBetween;
+        SetPending(true);
     }
 
     void Update()
@@ -93,6 +101,7 @@ public class EnemySpawner : MonoBehaviour
 
             // A game-start wave with nothing more coming: the last enemy wins the game.
             if (left == 0 && spawnAtStart && spawnKey == Key.None) Health.winWhenEnemiesGone = true;
+            if (left == 0) SetPending(false);
         }
     }
 
@@ -115,6 +124,16 @@ public class EnemySpawner : MonoBehaviour
     void OnDestroy()
     {
         Health.winWhenEnemiesGone = true;
+        SetPending(false);
+    }
+
+    // Health.spawnersWaiting counts spawners with enemies still to send.
+    // RoomDoor stays locked while it's above 0.
+    void SetPending(bool on)
+    {
+        if (on == pending) return;
+        pending = on;
+        Health.spawnersWaiting = Health.spawnersWaiting + (on ? 1 : -1);
     }
 
     void OnTriggerEnter2D(Collider2D other)
