@@ -42,6 +42,9 @@ public class Health : MonoBehaviour
     // shouldn't end the game.
     public static bool winWhenEnemiesGone = true;
 
+    // EnemySpawner counts itself here while it still has enemies to send.
+    public static int spawnersWaiting = 0;
+
     float safeUntil = 0f;
 
     void Start()
